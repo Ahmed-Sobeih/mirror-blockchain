@@ -9,9 +9,9 @@
 typedef struct Block {
     int index;
     time_t timestamp;
-    char data[DATA_SIZE];
-    char prev_hash[HASH_SIZE];
-    char hash[HASH_SIZE];
+    char data[256];
+    char prev_hash[65];
+    char hash[65];
     int nonce;
 } Block;
 Block create_genesis_block();
