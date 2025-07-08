@@ -4,7 +4,6 @@
 #include "block.h"
 #include <openssl/sha.h>
 
-
 void calculate_hash(Block* block) {
     char input[1024];
     snprintf(input, sizeof(input), "%d%ld%s%s%d",
@@ -23,6 +22,21 @@ void calculate_hash(Block* block) {
     block->hash[64] = '\0';
 }
 
+void mine_block(Block* block) {
+    while (1) {
+        calculate_hash(block);
+        if (strncmp(block->hash, "00", 2) == 0) {
+            printf("✅ Block mined! Nonce: %d\n", block->nonce);
+            break;
+        }
+        block->nonce++;
+    }
+}
+
+
+
+
+
 Block create_genesis_block() {
     Block block;
 
@@ -33,9 +47,12 @@ Block create_genesis_block() {
     block.nonce = 0;
 
     calculate_hash(&block);
+    mine_block(&block);
 
     return block;
 }
+
+
 
 
 
