@@ -16,4 +16,7 @@ typedef struct Block {
 } Block;
 Block create_genesis_block();
 
+Block add_block(Block prev_block, const char* data);
+
+
 #endif // BLOCK_H

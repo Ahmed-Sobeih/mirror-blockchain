@@ -52,6 +52,19 @@ Block create_genesis_block() {
     return block;
 }
 
+Block add_block(Block prev_block, const char* data) {
+    Block block;
+    block.index = prev_block.index + 1;
+    block.timestamp = time(NULL);
+    strncpy(block.data, data, sizeof(block.data));
+    strncpy(block.prev_hash, prev_block.hash, sizeof(block.prev_hash));
+    block.nonce = 0;
+
+    mine_block(&block);
+    return block;
+}
+
+
 
 
 
